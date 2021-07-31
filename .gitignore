@@ -1,0 +1,11 @@
+venv/**
+.DS_Store
+varr.env
+app.db
+logs/**
+__pycache__/
+app/__pycache__/
+main/__pycache__/
+errors/__pycache__/
+auth/__pycache__/
+*.mo
