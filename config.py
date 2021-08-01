@@ -7,7 +7,7 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(
         'postgres://', 'postgresql://') or \
-        'sqlite:///' + os.path.join(basedir, 'app.db')
+        'sqlite:///' + os.path.join(basedir, 'datab.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False # dont track modifications to database(i.e. dont send notification that change has been made)
     
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
