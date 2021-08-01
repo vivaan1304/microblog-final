@@ -155,17 +155,19 @@ def user_popup(username):
 @bp.route('/send_message/<recipient>', methods=['GET', 'POST'])
 @login_required
 def send_message(recipient):
-    user = User.query.filter_by(username = recipient).first_or_404()
+    user = User.query.filter_by(username=recipient).first_or_404()
     form = MessageForm()
     if form.validate_on_submit():
-        msg = Message(author = current_user, recipient=user, body =form.message.data)
+        msg = Message(author=current_user, recipient=user,
+                      body=form.message.data)
         db.session.add(msg)
         user.add_notification('unread_message_count', user.new_messages())
         db.session.commit()
-        
         flash(_('Your message has been sent.'))
-        return redirect(url_for('main.user', username = recipient))
-    return render_template('send_message.html', title=_('Send Message'), form  = form, recipient=recipient)
+        return redirect(url_for('main.user', username=recipient))
+    return render_template('send_message.html', title=_('Send Message'),
+                           form=form, recipient=recipient)
+
 
 @bp.route('/messages')
 @login_required
@@ -183,6 +185,8 @@ def messages():
         if messages.has_prev else None
     return render_template('messages.html', messages=messages.items,
                            next_url=next_url, prev_url=prev_url)
+
+
 @bp.route('/notifications')
 @login_required
 def notifications():
